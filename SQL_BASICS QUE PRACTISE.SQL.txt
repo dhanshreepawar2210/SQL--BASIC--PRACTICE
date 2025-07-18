@@ -1,0 +1,353 @@
+DROP TABLE IF EXISTS Orders CASCADE;
+
+CREATE TABLE Orders (
+OrderID INT,
+ProductName VARCHAR(50),
+Quantity INT,
+CustomerID INT
+);
+INSERT INTO Orders (OrderID, ProductName, Quantity, CustomerID)
+VALUES
+(101, 'Mobile', 1, 2001),
+(102, 'Laptop', 2, 2002),
+(103, 'Tablet', 3, 2003),
+(104, 'Pen', 5, 2004),
+(105, 'Notebook', 1, 2005),
+(106, 'Marker', 2, 2006),
+(107, 'Charger', 4, 2001),
+(108, 'Mobile', 3, 2007),
+(109, 'Tablet', 2, 2008),
+(110, 'Laptop', 5, 2010);
+
+--Select orders where product name is in (‘Mobile’, ‘Laptop’, ‘Tablet’).
+
+select *from Orders
+where ProductName in ('Mobile', 'Laptop', 'Tablet');
+
+--Select orders with OrderID in (101, 105, 110).
+
+SELECT * FROM Orders
+where OrderID IN (101, 105 ,110)
+
+--Select orders where quantity is in (1, 3, 5).
+
+select * from Orders
+where quantity in (1 , 3, 5)
+
+--Select orders placed for products in (‘Pen’, ‘Notebook’, ‘Marker’).
+
+select * from Orders
+where ProductName in ( 'Pen' , 'Notebook' , 'Marker')
+
+--Select orders from customers with IDs in (2001, 2005, 2010).
+
+select *from Orders
+where CustomerID IN (2001 ,2005 ,2010)
+
+
+#NOT IN example
+
+drop table if exists Students cascade
+
+CREATE TABLE Students (
+RollNo INT PRIMARY KEY,
+Name VARCHAR(50),
+Class VARCHAR(20),
+Marks INT
+);
+INSERT INTO Students (RollNo, Name, Class, Marks) VALUES
+(5, 'Raj', '10', 85),
+(10, 'Amit', '12', 90),
+(15, 'Neha', 'BSc', 78),
+(20, 'Pooja', 'BA', 88),
+(25, 'Ravi', 'BCom', 82),
+(30, 'Anita', 'BSc', 91),
+(35, 'Kiran', 'MSc', 76),
+(40, 'Sneha', 'BBA', 69),
+(101, 'Sita', '10', 95),
+(102, 'Anil', 'BA', 87),
+(103, 'Meena', 'BCA', 93);
+
+--Select students not in class (‘10’, ‘12’).
+select * from Students
+where class not in ('10' , '12');
+
+--Select students whose names are not in (‘Raj’, ‘Amit’).
+select * from Students
+where Name not in ('Raj', 'Amit');
+
+--Select students whose RollNo is not in (5, 10, 15).
+select * from Students
+where RollNo not in ('5','10','15');
+
+--Select students who are not from class (‘BSc’, ‘BA’).
+select * from Students
+where class not in ( 'BSc', 'BA');
+
+--Select students not in RollNo (101, 102, 103).
+select * from Students
+where RollNo not in ('101','102','103');
+
+
+
+
+
+# BETWEEN EXAMPLE
+
+
+
+drop table if exists products cascade ;
+
+CREATE TABLE Products (
+ProductID INT,
+ProductName VARCHAR(100),
+Price DECIMAL(10,2),
+DateAdded DATE,
+Stock INT
+);
+INSERT INTO Products (ProductID, ProductName, Price, DateAdded, Stock) VALUES
+(1, 'Mobile', 450.00, '2023-02-15', 10),
+(2, 'Laptop', 900.00, '2023-04-10', 4),
+(3, 'Tablet', 299.99, '2023-08-05', 7),
+(4, 'Monitor', 120.50, '2022-11-20', 12),
+(5, 'Keyboard', 75.75, '2023-01-10', 15),
+(6, 'Mouse', 50.00, '2023-12-01', 20),
+(7, 'Charger', 60.00, '2023-06-18', 6),
+(10, 'Speaker', 250.00, '2023-05-22', 5),
+(15, 'Headphones', 499.00, '2023-09-30', 8),
+(20, 'Camera', 1000.00, '2023-03-05', 3);
+
+--Select products priced between 100 and 500.
+
+select * from Products
+where price between 100 and 500;
+
+--Select products with ProductID between 10 and 20.
+
+select *from Products
+where ProductID between 10 and 20;
+
+--Select products where price is between 50.5 and 99.9.
+
+select *from Products
+where price between 50.5 and 99.9;
+
+--Select products added between 2023-01-01 and 2023-12-31 (assuming a date column).
+select * from products
+where DateAdded between '2023-01-01' and '2023-12-31';
+
+--Select products with stock between 5 and 15.
+select *from products
+where Stock between 5 and 15;
+
+#NOT BETWEEN
+
+drop table if exists Products cascade;
+CREATE TABLE Products (
+ProductID INT,
+ProductName VARCHAR(100),
+Price DECIMAL(10,2),
+DateAdded DATE,
+Stock INT,
+Discount DECIMAL(4,2) -- Discount in decimal (e.g., 0.08 for 8%)
+);
+INSERT INTO Products (ProductID, ProductName, Price, DateAdded, Stock, Discount) VALUES
+(1, 'Mobile', 450.00, '2023-02-15', 10, 0.08),
+(2, 'Laptop', 900.00, '2022-12-25', 60, 0.12),
+(3, 'Tablet', 250.00, '2023-03-10', 30, 0.05),
+(4, 'Monitor', 99.99, '2023-04-01', 15, 0.10),
+(5, 'Keyboard', 125.50, '2023-05-05', 45, 0.07),
+(6, 'Mouse', 80.00, '2022-11-18', 5, 0.03),
+(7, 'Charger', 110.00, '2023-06-20', 9, 0.09),
+(10, 'Speaker', 275.00, '2023-07-15', 25, 0.11),
+(15, 'Headphones', 499.00, '2023-08-01', 12, 0.06),
+(20, 'Camera', 1000.00, '2023-09-10', 55, 0.15);
+
+--Select products with price not between 100 and 300.
+select * from products
+where price not between 100 and 300;
+--Select products where ProductID not between 5 and 15.
+select *from products
+where ProductId not between 5 and 15;
+
+--Select products with stock not between 10 and 50.
+select * from products
+where stock not between 10 and 50;
+
+--Select products with discount not between 5% and 10%.
+select * from Products
+where Discount not between 0.05 and 0.10;
+
+--Select products not added between certain dates.
+SELECT * FROM Products
+WHERE DateAdded NOT BETWEEN '2023-01-01' AND '2023-06-30';
+
+# LIKE EXAMPLE 
+
+drop table if exists Customers Cascade;
+CREATE TABLE Customers (
+CustomerID INT PRIMARY KEY,
+CustomerName VARCHAR(50)
+);
+INSERT INTO Customers (CustomerID, CustomerName) VALUES
+(1, 'Anita'),
+(2, 'Arun'),
+(3, 'Kevin'),
+(4, 'Sunita'),
+(5, 'Sohan'),
+(6, 'Ravi'),
+(7, 'Meena'),
+(8, 'Avni'),
+(9, 'Sita'),
+(10, 'Vikram');
+
+--Select customers whose name starts with ‘A’.
+select* from Customers
+where CustomerName like 'A%';
+
+--Select customers whose name ends with ‘n’.
+SELECT*FROM Customers
+where CustomerName like '%n';
+
+--Select customers whose name contains ‘vi’.
+select*from Customers
+where CustomerName like '%vi%';
+
+--Select customers whose name starts with ‘S’ and ends with ‘a’.
+select * from Customers
+where CustomerName like 'S%a';
+
+--Select customers whose name has exactly 5 letters.
+select* from Customers
+where CustomerName like '_____';
+
+#Not_like EXAMPLE 
+
+CREATE TABLE Customer (
+CustomerID INT,
+CustomerName VARCHAR(50)
+);
+
+INSERT INTO Customer (CustomerID, CustomerName)
+VALUES
+(1, 'Anita'),
+(2, 'Ravi'),
+(3, 'Suresh'),
+(4, 'Meena'),
+(5, 'Kiran'),
+(6, 'Pooja'),
+(7, 'Raj'),
+(8, 'Manoj'),
+(9, 'Ashok'),
+(10, 'Sneha');
+
+--Select customers whose name does not start with ‘A’.
+select * from Customer
+where CustomerName not like 'A%';
+
+--Select customers whose name does not end with ‘a’.
+select * from Customer
+where CustomerName not like '%A';
+
+--Select customers whose name does not contain ‘sh’.
+select * from Customer
+where CustomerName not like '%sh%';
+
+--Select customers whose name is not like ‘%an%’.
+select*from Customer
+where CustomerName not like '%an%';
+
+--Select customers whose name is not starting with ‘R’.
+select * from Customer
+where CustomerName not like 'R%';
+
+
+
+
+
+#NULL EXAMPLE 
+
+CREATE TABLE StudentDetails (
+StudentID INT,
+Name VARCHAR(50),
+Email VARCHAR(100),
+Marks INT,
+ReturnDate DATE,
+MentorID INT,
+AdmissionDate DATE
+);
+INSERT INTO StudentDetails VALUES
+(1, 'Amit', 'amit@gmail.com', 85, '2025-07-10', 501, '2024-06-01'),
+(2, 'Bhavna', NULL, NULL, NULL, NULL, '2024-06-02'),
+(3, 'Chetan', 'chetan@gmail.com', 90, '2025-07-11', 502, '2024-06-01'),
+(4, 'Divya', NULL, 78, NULL, NULL, '2024-06-03'),
+(5, 'Esha', 'esha@gmail.com', NULL, '2025-07-12', 503, '2024-06-04'),
+(6, 'Farhan', NULL, NULL, NULL, NULL, NULL);
+
+--SELECT * FROM StudentDetails WHERE Email IS NULL;
+select * from StudentDetails
+where Email is null;
+
+--Select students who don't have Marks:
+
+Select * from StudentDetails
+where Marks is null;
+
+--Select students whose Return Date is NULL:
+
+select * from StudentDetails
+where ReturnDate is null;
+
+--Select students with no Mentor assigned:
+select *from StudentDetails
+where MentorId is null;
+
+--Select students whose Admission Date is NULL:
+select * from StudentDetails
+where AdmissionDate is null;
+
+
+#NOT NULL EXAMPLE 
+
+CREATE TABLE StuselectdentRecords (
+StudentID INT,
+Name VARCHAR(50),
+Email VARCHAR(100),
+Marks INT,
+ReturnDate DATE,
+MentorID INT,
+AdmissionDate DATE
+);
+INSERT INTO StudentRecords VALUES
+(1, 'Amit', 'amit@gmail.com', 85, '2025-07-10', 501, '2024-06-01'),
+(2, 'Bhavna', NULL, NULL, NULL, NULL, '2024-06-02'),
+(3, 'Chetan', 'chetan@gmail.com', 90, '2025-07-11', 502, '2024-06-01'),
+(4, 'Divya', NULL, 78, NULL, NULL, '2024-06-03'),
+(5, 'Esha', 'esha@gmail.com', NULL, '2025-07-12', 503, '2024-06-04');
+
+
+--Select students who have provided email (Email is NOT NULL)
+
+select * from StudentRecords
+where Email is not null;
+
+--Select students who have marks (Marks is NOT NULL):
+
+select * from StudentRecords
+where marks is not null;
+
+--Select students whose return date is available (ReturnDate is NOT NULL):
+
+select * from StudentRecords
+where ReturnDate is not null;
+
+--Select students who have been assigned a mentor (MentorID is NOT NULL):
+
+select * from Studentrecords
+where MentorID is not null;
+
+--Select students who have an admission date (AdmissionDate is NOT NULL)
+
+select * from StudentRecords
+where AdmissionDate is not null;
+
